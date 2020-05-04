@@ -11,9 +11,17 @@
 
 body {
   display: grid;
+  font-family: Georgia, "Times New Roman", Times, serif;
   grid-template-areas:
     "nav"
     "main";
+}
+
+h1,
+h2,
+h3,
+nav {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #navbar {
