@@ -8,3 +8,16 @@
   --text-light: #fff;
   --text-dark: #000;
 }
+
+body {
+  display: grid;
+  grid-template-areas: "nav main";
+}
+
+#navbar {
+  grid-area: "nav";
+}
+
+#main-doc {
+  grid-area: "main";
+}
