@@ -42,6 +42,11 @@ nav {
   background-color: white;
 }
 
+.nav-links {
+  list-style: none;
+  line-height: 1.4em;
+}
+
 #main-doc {
   grid-area: main;
   margin: 1em 0;
