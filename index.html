@@ -28,31 +28,119 @@
         <header>
           <h2>Introduction</h2>
         </header>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nulla esse accusantium magnam odio, blanditiis perferendis ipsa illo ea commodi laboriosam non ipsum consequatur quibusdam libero quasi maiores asperiores consequuntur.</code>
+        <p>This page provides an informal overview of some of the main numeral systems used in Computer Science.</p>
+        <p>First we'll review both positional notation and the numeral system that most people are familiar with—the
+          Decimal Numeral System. Then we will will take a look at a few more systems used in Computer Science, namely:
+          Binary, Octal, and Hexadecimal.</p>
+        <p>You can jump to any section you'd like, but it is recommended to review these in the order presented.</p>
+        <h3>Recommended Reading Order:</h3>
         <ul>
-          <li><a href="#Decimal_Numeral_System">Decimal</a></li>
-          <li><a href="#Binary_Numeral_System">Binary</a></li>
-          <li><a href="#Octal_Numeral_System">Octal</a></li>
-          <li><a href="#Hexadecimal_Numeral_System">Hexadecimal</a></li>
+          <li><a href="#Positional_Notation">Positional Notation</a></li>
+          <li><a href="#Decimal_Numeral_System">Decimal Numeral System</a></li>
+          <li><a href="#Binary_Numeral_System">Binary Numeral System</a></li>
+          <li><a href="#Octal_Numeral_System">Octal Numeral System</a></li>
+          <li><a href="#Hexadecimal_Numeral_System">Hexadecimal Numeral System</a></li>
         </ul>
       </section>
       <section id="Positional_Notation" class="main-section">
         <header>
           <h2>Positional Notation</h2>
         </header>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nulla esse accusantium magnam odio, blanditiis perferendis ipsa illo ea commodi laboriosam non ipsum consequatur quibusdam libero quasi maiores asperiores consequuntur.</code>
+        <p>All the numeral systems discussed in this document use positional notation or can be said to be positional
+          numeral systems. In positional numeral systems, there is always a base. The base is the number of unique
+          digits that can be used to represent numbers. The letter b is typically used as the symbol to represent the
+          concept of base or it is indicated by using a phrase like base-b (where b is the base number, e.g. base-2,
+          base-10, etc.).</p>
+
+        <p>For example, if we used the entire alphabet as the digits of a positional numeral system that system would be
+          a "base-26" system (because the alphabet has 26 unique letters). The symbols that represent a digit do not
+          have to be the decimal numbers that we are used to seeing. Keep an open mind to this concept—letters
+          representing nubmers—because we will revisit it when we discuss hexadecimal numbers.</p>
+
+        <p>In modern positional systems, like the systems discussed here, the value that each digit contributes to the
+          total value of a number is determined by the digit's place within that number. Each digit's value must be
+          multiplied by a value that is equal to the base raised to a power determined by the digit's position.</p>
+
+        <h3>Concepts in Practice: Devising a Base-4 Numeral System</h3>
+
+        <p>Let's explore the concepts introduced above and see how we could devise our own base-4 numeral system. For
+          simplicity's sake we are only going to allow positive whole number values to be represented in our system, so
+          we will not have to deal with any negative or fractional values. We will also just show a method of converting
+          our base-4 numbers to their decimal equivalents using JavaScript.</p>
+
+        <p>First, we will determine the symbols that will be used to represent our digit. We can use the letters A, B,
+          C, and D.
+          Then we will give each symbol a value, 0, 1, 2, and 3 respectively.</p>
+
+        <p>It should be noted, we could just use the symbols '0', '1', '2', and '3' for this system, but this shows that
+          the digits used in the system are independent of the system itself. In fact, we could have used
+          any letters or symbols available to us on a keyboard as our symbols for representing the values from 0 to 3.
+          We shall keep it simple though and stick with A - D to avoid making things confusing.</p>
+
+        <pre><code>
+// Using an object to represent our digits and their values,
+// with the object properties representing each symbol used
+// for a digit and the object property values representing
+// the digit's value.
+const digits = {
+  A: 0, // A = 0
+  B: 1, // B = 1
+  C: 2, // c = 2
+  D: 3  // D = 3
+};
+
+
+function convertBase4StrToDecimal(str) {
+  let total = 0;
+
+  for (let power = 0; power < str.length; power++) {
+    // Get the index of the current digit's position
+    // starting from the right-side.
+    let index = str.length - (power + 1);
+
+    // Get the digit at that position.
+    let digit = str[index];
+
+    // Get the value of that digit
+    let value = digits[digit];
+
+    // If the digit is not a valid symbol in our system,
+    // then return undefined.
+    if (value === undefined) {
+      return value;
+    }
+
+    // Keep a tally of the product of each digit's value
+    // and a power of 4 based on the digit's position.
+    // (e.g. ones position: 4^0; fours position: 4^1,
+    //  sixteens position: 4^2, etc.)
+    total += value * Math.pow(4, power);
+  }
+
+  return total;
+}
+
+convertBase4StrToDecimal('1')   // returns: undefined
+convertBase4StrToDecimal('E')   // returns: undefined
+
+convertBase4StrToDecimal('A')   // returns: 0
+convertBase4StrToDecimal('B')   // returns: 1
+convertBase4StrToDecimal('C')   // returns: 2
+convertBase4StrToDecimal('D')   // returns: 3
+convertBase4StrToDecimal('BA')  // returns: 4
+convertBase4StrToDecimal('BB')  // returns: 5
+convertBase4StrToDecimal('BC')  // returns: 6
+convertBase4StrToDecimal('BD')  // returns: 7
+convertBase4StrToDecimal('CA')  // returns: 8
+convertBase4StrToDecimal('CB')  // returns: 9
+convertBase4StrToDecimal('CC')  // returns: 10
+convertBase4StrToDecimal('CD')  // returns: 11
+convertBase4StrToDecimal('DA')  // returns: 12
+convertBase4StrToDecimal('DB')  // returns: 13
+convertBase4StrToDecimal('DC')  // returns: 14
+convertBase4StrToDecimal('DD')  // returns: 15
+convertBase4StrToDecimal('BAA') // returns: 16
+        </code></pre>
       </section>
       <section id="Decimal_Numeral_System" class="main-section">
         <header>
