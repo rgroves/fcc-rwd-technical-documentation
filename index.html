@@ -28,12 +28,12 @@
         <header>
           <h2>Introduction</h2>
         </header>
-        <p>This page provides an informal overview of some of the main numeral systems used in Computer Science.</p>
-        <p>First we'll review both positional notation and the numeral system that most people are familiar with—the
-          Decimal Numeral System. Then we will will take a look at a few more systems used in Computer Science, namely:
+        <p>This page provides an informal overview of some of the main numeral systems used in Computer Science. First,
+          we&#39;ll review both positional notation and the numeral system that most people are familiar with—the
+          Decimal Numeral System. Then we will will take a look at the main systems used in Computer Science, namely:
           Binary, Octal, and Hexadecimal.</p>
-        <p>You can jump to any section you'd like, but it is recommended to review these in the order presented.</p>
-        <h3>Recommended Reading Order:</h3>
+        <p>You can jump to any section you&#39;d like, but it is recommended to review these in the order presented.</p>
+        <h3 id="recommended-reading-order-">Recommended Reading Order:</h3>
         <ul>
           <li><a href="#Positional_Notation">Positional Notation</a></li>
           <li><a href="#Decimal_Numeral_System">Decimal Numeral System</a></li>
@@ -46,101 +46,126 @@
         <header>
           <h2>Positional Notation</h2>
         </header>
-        <p>All the numeral systems discussed in this document use positional notation or can be said to be positional
-          numeral systems. In positional numeral systems, there is always a base. The base is the number of unique
-          digits that can be used to represent numbers. The letter b is typically used as the symbol to represent the
-          concept of base or it is indicated by using a phrase like base-b (where b is the base number, e.g. base-2,
-          base-10, etc.).</p>
+        <p>The numeral systems discussed herein use a <em>positional notation</em> or can be said to be <em>positional
+            numeral systems</em>, or just <em>positional systems</em> in the context of this document. A positional
+          system is a system for representing numbers using an ordered set of <em>numeral symbols</em> (or
+          <em>digits</em>), in which each digit has a value that depends on its position within a number.</p>
+        <p>For any number expressed using a modern positional system, you will need to know the <em>base</em> (or
+          <em>radix</em>) of the system to determine the value that each individual digit contributes to the total value
+          of the number. The base is the number of unique digits used by the system. The letter <em>b</em> is the symbol
+          typically used as a notation for base. A base can also be indicated by using a phrase like <em>base-b</em>
+          (where <em>b</em> is the base number, e.g. <em>base-2</em>, <em>base-10</em>, etc.).</p>
+        <p>For example, if we used the entire English alphabet as the digits of a positional system, that system would
+          be a <em>base-26</em> system (because the English alphabet is a set of 26 letters) and every digit would
+          assigned a value from 0 to 25. Note that the numeral symbols used do not have to be decimal digits. Keep this
+          concept of using letters as digits in mind, as we will revisit it when we discuss the hexadecimal numeral
+          system.</p>
+        <p>Once the base is known, you can use it to determine the value of each position (or <em>place</em>) in a
+          number. Each position has a value assigned to it, expressed in powers of the base (<em>b<sup>x</sup></em>).
+          We&#39;ll use the following to denote the positions of a number, from left-to-right:</p>
+        <ul>
+          <li><em>p<sub>N</sub></em></li>
+          <li><em>...</em></li>
+          <li><em>p<sub>2</sub></em></li>
+          <li><em>p<sub>1</sub></em></li>
+          <li><em>p<sub>0</sub></em></li>
+        </ul>
+        <p>Meaning the right-most digit is at postition <em>p<sub>0</sub></em>, the next digit to the left is at
+          postition <em>p<sub>1</sub></em>, and so forth. With that we can express the value given to each position as
+          follows. The value of:</p>
+        <ul>
+          <li><em>p<sub>N</sub></em> is <em>b<sup>N</sup></em></li>
+          <li><em>...</em></li>
+          <li><em>p<sub>2</sub></em> is <em>b<sup>2</sup></em></li>
+          <li><em>p<sub>1</sub></em> is <em>b<sup>1</sup></em></li>
+          <li><em>p<sub>0</sub></em> is <em>b<sup>0</sup></em></li>
+        </ul>
+        <p>Now, to determine each digit&#39;s individual value, you take the value of the digit and multiply it by the
+          value of the position where the digit is located in the number. By summing each digit&#39;s individual value,
+          you get a number&#39;s total value.</p>
+        <p>In summary, to get the total value (<em>t</em>) for a number, you take the value of the digit (<em>d</em>)
+          at each position (<em>p<sub>N</sub></em>) and multiply it by the value of that position. In the notation below
+          we express the value of the digit at position <em>p<sub>N</sub></em> as <em>d<sub>p<sup>N</sup></sub></em></p>
+        <p><em>t = sum( (d<sub>p<sup>N</sup></sub> * b<sup>N</sup>) + ... + (d<sub>p<sup>2</sup></sub> * b<sup>2</sup>)
+            + (d<sub>p<sup>1</sup></sub> * b<sup>1</sup>) + (d<sub>p<sup>0</sup></sub> * b<sup>0</sup>) )</em></p>
+        <h3 id="concepts-in-practice-devising-a-base-4-numeral-system">Concepts in Practice: Devising a Base-4 Numeral
+          System</h3>
+        <p>Let&#39;s explore the concepts introduced above and see how we could devise our own base-4 numeral system.
+          For simplicity&#39;s sake we are only going to allow positive whole number values to be represented in our
+          system, so we will not have to deal with any negative or fractional values. We will also just show a method of
+          converting our base-4 numbers to their decimal equivalents using JavaScript.</p>
+        <p>First, we will determine the symbols that will be used to represent our digits. We can use the letters A, B,
+          C, and D. Then we will give each symbol a value, 0, 1, 2, and 3 respectively.</p>
+        <p>It should be noted, we could just use the symbols &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, and &#39;3&#39; for
+          this system, but this shows that the digits used in the system are independent of the system itself. In fact,
+          we could have used any letters or symbols available to us on a keyboard as our symbols for representing the
+          values from 0 to 3. We shall keep it simple though and stick with A - D.</p>
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertBase4StrToDecimal</span><span class="hljs-params">(str)</span> {</span>
+  <span class="hljs-built_in">let</span> total = <span class="hljs-number">0</span>;
 
-        <p>For example, if we used the entire alphabet as the digits of a positional numeral system that system would be
-          a "base-26" system (because the alphabet has 26 unique letters). The symbols that represent a digit do not
-          have to be the decimal numbers that we are used to seeing. Keep an open mind to this concept—letters
-          representing nubmers—because we will revisit it when we discuss hexadecimal numbers.</p>
+  <span class="hljs-comment">// Using an object to represent our digits</span>
+  <span class="hljs-comment">// and their values, with the object properties</span>
+  <span class="hljs-comment">// representing each symbol used for a digit and</span>
+  <span class="hljs-comment">// the object property values representing the</span>
+  <span class="hljs-comment">// digit's value.</span>
+  const digits = {
+    A: <span class="hljs-number">0</span>, <span class="hljs-comment">// A = 0</span>
+    B: <span class="hljs-number">1</span>, <span class="hljs-comment">// B = 1</span>
+    C: <span class="hljs-number">2</span>, <span class="hljs-comment">// c = 2</span>
+    D: <span class="hljs-number">3</span>, <span class="hljs-comment">// D = 3</span>
+  };
 
-        <p>In modern positional systems, like the systems discussed here, the value that each digit contributes to the
-          total value of a number is determined by the digit's place within that number. Each digit's value must be
-          multiplied by a value that is equal to the base raised to a power determined by the digit's position.</p>
+  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">let</span> power = <span class="hljs-number">0</span>; power &lt; <span class="hljs-built_in">str</span>.length; power++) {
+    <span class="hljs-comment">// Get the index of the current digit's position</span>
+    <span class="hljs-comment">// starting from the right-side.</span>
+    <span class="hljs-built_in">let</span> index = <span class="hljs-built_in">str</span>.length - (power + <span class="hljs-number">1</span>);
 
-        <h3>Concepts in Practice: Devising a Base-4 Numeral System</h3>
+    <span class="hljs-comment">// Get the digit at that position.</span>
+    <span class="hljs-built_in">let</span> digit = <span class="hljs-built_in">str</span>[index];
 
-        <p>Let's explore the concepts introduced above and see how we could devise our own base-4 numeral system. For
-          simplicity's sake we are only going to allow positive whole number values to be represented in our system, so
-          we will not have to deal with any negative or fractional values. We will also just show a method of converting
-          our base-4 numbers to their decimal equivalents using JavaScript.</p>
+    <span class="hljs-comment">// Get the value of that digit</span>
+    <span class="hljs-built_in">let</span> value = digits[digit];
 
-        <p>First, we will determine the symbols that will be used to represent our digit. We can use the letters A, B,
-          C, and D.
-          Then we will give each symbol a value, 0, 1, 2, and 3 respectively.</p>
-
-        <p>It should be noted, we could just use the symbols '0', '1', '2', and '3' for this system, but this shows that
-          the digits used in the system are independent of the system itself. In fact, we could have used
-          any letters or symbols available to us on a keyboard as our symbols for representing the values from 0 to 3.
-          We shall keep it simple though and stick with A - D to avoid making things confusing.</p>
-
-        <pre><code>
-// Using an object to represent our digits and their values,
-// with the object properties representing each symbol used
-// for a digit and the object property values representing
-// the digit's value.
-const digits = {
-  A: 0, // A = 0
-  B: 1, // B = 1
-  C: 2, // c = 2
-  D: 3  // D = 3
-};
-
-
-function convertBase4StrToDecimal(str) {
-  let total = 0;
-
-  for (let power = 0; power < str.length; power++) {
-    // Get the index of the current digit's position
-    // starting from the right-side.
-    let index = str.length - (power + 1);
-
-    // Get the digit at that position.
-    let digit = str[index];
-
-    // Get the value of that digit
-    let value = digits[digit];
-
-    // If the digit is not a valid symbol in our system,
-    // then return undefined.
-    if (value === undefined) {
+    <span class="hljs-comment">// If the digit is not a valid symbol in our</span>
+    <span class="hljs-comment">// system, then return NaN.</span>
+    <span class="hljs-keyword">if</span> (value === NaN) {
       return value;
     }
 
-    // Keep a tally of the product of each digit's value
-    // and a power of 4 based on the digit's position.
-    // (e.g. ones position: 4^0; fours position: 4^1,
-    //  sixteens position: 4^2, etc.)
-    total += value * Math.pow(4, power);
+    <span class="hljs-comment">// Keep a tally of the product of each digit's</span>
+    <span class="hljs-comment">// value and a power of 4 based on the digit's</span>
+    <span class="hljs-comment">// position. (e.g. ones position: 4^0; fours </span>
+    <span class="hljs-comment">// position: 4^1, sixteens position: 4^2, etc.)</span>
+    total += value * Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">4</span>, power);
   }
 
   return total;
 }
 
-convertBase4StrToDecimal('1')   // returns: undefined
-convertBase4StrToDecimal('E')   // returns: undefined
+<span class="hljs-built_in">let</span> <span class="hljs-built_in">log</span> = console.<span class="hljs-built_in">log</span>;
 
-convertBase4StrToDecimal('A')   // returns: 0
-convertBase4StrToDecimal('B')   // returns: 1
-convertBase4StrToDecimal('C')   // returns: 2
-convertBase4StrToDecimal('D')   // returns: 3
-convertBase4StrToDecimal('BA')  // returns: 4
-convertBase4StrToDecimal('BB')  // returns: 5
-convertBase4StrToDecimal('BC')  // returns: 6
-convertBase4StrToDecimal('BD')  // returns: 7
-convertBase4StrToDecimal('CA')  // returns: 8
-convertBase4StrToDecimal('CB')  // returns: 9
-convertBase4StrToDecimal('CC')  // returns: 10
-convertBase4StrToDecimal('CD')  // returns: 11
-convertBase4StrToDecimal('DA')  // returns: 12
-convertBase4StrToDecimal('DB')  // returns: 13
-convertBase4StrToDecimal('DC')  // returns: 14
-convertBase4StrToDecimal('DD')  // returns: 15
-convertBase4StrToDecimal('BAA') // returns: 16
-        </code></pre>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"1"</span>)); <span class="hljs-comment">// output: NaN</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"E"</span>)); <span class="hljs-comment">// output: NaN</span>
+
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"A"</span>)); <span class="hljs-comment">// output: 0</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"B"</span>)); <span class="hljs-comment">// output: 1</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"C"</span>)); <span class="hljs-comment">// output: 2</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"D"</span>)); <span class="hljs-comment">// output: 3</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BA"</span>)); <span class="hljs-comment">// output: 4</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BB"</span>)); <span class="hljs-comment">// output: 5</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BC"</span>)); <span class="hljs-comment">// output: 6</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BD"</span>)); <span class="hljs-comment">// output: 7</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CA"</span>)); <span class="hljs-comment">// output: 8</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CB"</span>)); <span class="hljs-comment">// output: 9</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CC"</span>)); <span class="hljs-comment">// output: 10</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CD"</span>)); <span class="hljs-comment">// output: 11</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DA"</span>)); <span class="hljs-comment">// output: 12</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DB"</span>)); <span class="hljs-comment">// output: 13</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DC"</span>)); <span class="hljs-comment">// output: 14</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DD"</span>)); <span class="hljs-comment">// output: 15</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BAA"</span>)); <span class="hljs-comment">// output: 16</span>
+</code></pre>
+
       </section>
       <section id="Decimal_Numeral_System" class="main-section">
         <header>
