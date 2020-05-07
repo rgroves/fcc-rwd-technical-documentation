@@ -91,3 +91,103 @@ nav {
     }
   }
 }
+
+/* Toggle Menu */
+#navMenu {
+  border-top-left-radius: 1em;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  width: 250px;
+  margin-top: 60px;
+  transform: translateX(250px);
+  transition: transform 0.25s ease-in-out;
+  background: white; /*linear-gradient(180deg, #ddd 0%, 60%, #222 100%); */
+  border: 1px black solid;
+}
+
+/* When the toggle is active (checked) slide in menu from side */
+input[type="checkbox"]:checked ~ #navMenu {
+  transform: translateX(0);
+}
+
+input[type="checkbox"].navMenuToggleControl {
+  display: none;
+  transition: all 0.25s;
+}
+
+.navMenuToggleIcon {
+  position: absolute;
+  top: 25px;
+  right: 10px;
+  height: 22px;
+  width: 22px;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.hamburger {
+  transition: all 0.25s;
+  box-sizing: border-box;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: #000;
+}
+
+.hamburger-middle {
+  transition: all 0.25s;
+  position: relative;
+  float: left;
+  margin-top: 3px;
+}
+
+.hamburger-top {
+  position: relative;
+  margin-top: 3px;
+  float: left;
+  transition: all 0.25s;
+}
+
+.hamburger-bottom {
+  position: relative;
+  margin-top: 3px;
+  float: left;
+  transition: all 0.25s;
+}
+
+/* Hide the horizontal bar in the menu toggle when active (checked). */
+input[type="checkbox"]:checked ~ .navMenuToggleIcon > .hamburger-middle {
+  opacity: 0;
+}
+
+/* Hide the horizontal bar in the menu toggle when active (checked). */
+input[type="checkbox"]:checked ~ .navMenuToggleIcon > .hamburger-top {
+  margin-top: 8px;
+  transform: rotate(135deg);
+  transition: all 0.25s;
+}
+
+input[type="checkbox"]:checked ~ .navMenuToggleIcon > .hamburger-bottom {
+  margin-top: -9px;
+  transform: rotate(-135deg);
+  transition: all 0.25s;
+}
+
+@media screen and (min-width: 576px) {
+  .navMenuToggleIcon {
+    display: none;
+  }
+
+  #navMenu {
+    border-top-left-radius: 0;
+    height: 100%;
+    position: relative;
+    width: 250px;
+    margin-top: 0;
+    transform: none;
+    transition: none;
+    border: none;
+  }
+}
