@@ -43,15 +43,6 @@
           we&#39;ll review both positional notation and the numeral system that most people are familiar with—the
           Decimal Numeral System. Then we will will take a look at the main systems used in Computer Science, namely:
           Binary, Octal, and Hexadecimal.</p>
-        <p>You can jump to any section you&#39;d like, but it is recommended to review these in the order presented.</p>
-        <h3 id="recommended-reading-order-">Recommended Reading Order:</h3>
-        <ul>
-          <li><a href="#Positional_Notation">Positional Notation</a></li>
-          <li><a href="#Decimal_Numeral_System">Decimal Numeral System</a></li>
-          <li><a href="#Binary_Numeral_System">Binary Numeral System</a></li>
-          <li><a href="#Octal_Numeral_System">Octal Numeral System</a></li>
-          <li><a href="#Hexadecimal_Numeral_System">Hexadecimal Numeral System</a></li>
-        </ul>
       </section>
       <section id="Positional_Notation" class="main-section">
         <header>
@@ -67,9 +58,9 @@
           typically used as a notation for base. A base can also be indicated by using a phrase like <em>base-b</em>
           (where <em>b</em> is the base number, e.g. <em>base-2</em>, <em>base-10</em>, etc.).</p>
         <p>For example, if we used the entire English alphabet as the digits of a positional system, that system would
-          be a <em>base-26</em> system (because the English alphabet is a set of 26 letters) and every digit would
-          assigned a value from 0 to 25. Note that the numeral symbols used do not have to be decimal digits. Keep this
-          concept of using letters as digits in mind, as we will revisit it when we discuss the hexadecimal numeral
+          be a <em>base-26</em> system (because the English alphabet is a set of 26 letters) and each digit would have a
+          value from 0 to 25 assigned to it. Note that the numeral symbols used do not have to be decimal digits. Keep
+          this concept of using letters as digits in mind, as we will revisit it when we discuss the hexadecimal numeral
           system.</p>
         <p>Once the base is known, you can use it to determine the value of each position (or <em>place</em>) in a
           number. Each position has a value assigned to it, expressed in powers of the base (<em>b<sup>x</sup></em>).
@@ -85,11 +76,11 @@
           postition <em>p<sub>1</sub></em>, and so forth. With that we can express the value given to each position as
           follows. The value of:</p>
         <ul>
-          <li><em>p<sub>N</sub></em> is <em>b<sup>N</sup></em></li>
+          <li><em>p<sub>N</sub></em> is equal to <em>b<sup>N</sup></em></li>
           <li><em>...</em></li>
-          <li><em>p<sub>2</sub></em> is <em>b<sup>2</sup></em></li>
-          <li><em>p<sub>1</sub></em> is <em>b<sup>1</sup></em></li>
-          <li><em>p<sub>0</sub></em> is <em>b<sup>0</sup></em></li>
+          <li><em>p<sub>2</sub></em> is equal to <em>b<sup>2</sup></em></li>
+          <li><em>p<sub>1</sub></em> is equal to <em>b<sup>1</sup></em></li>
+          <li><em>p<sub>0</sub></em> is equal to <em>b<sup>0</sup></em></li>
         </ul>
         <p>Now, to determine each digit&#39;s individual value, you take the value of the digit and multiply it by the
           value of the position where the digit is located in the number. By summing each digit&#39;s individual value,
@@ -113,17 +104,16 @@
         <p><em>t = 128 + 48 + 0 + 1</em></p>
         <p><em>t = 177 (base-10)</em></p>
         <h3 id="fractional-values">Fractional Values</h3>
-        <p>We didn&#39;t talk about fractional values yet, and to keep this overview light we will briefly reivew that
-          here. To represent a fractional part of a number in a positional numeral system a <em>radix point</em> is used
-          before the fractional part of the number. In base-10 (decmial) the radix point is commonly referred to as the
-          <em>decimal point</em>. The value of digits that come after the radix point are calculated in a similar manner
-          to that described above, with the differences noted below.</p>
+        <p>We haven&#39;t talk about fractional values yet. To represent a fractional part of a number in a positional
+          numeral system a <em>radix point</em> is used before the fractional part of the number. In base-10 (decmial)
+          the radix point is commonly referred to as the <em>decimal point</em>. The value of digits that come after the
+          radix point are calculated in a similar manner to that described above, with the differences noted below.</p>
         <p>When determining the positions after the radix point, you go from left-to-right (i.e. start with the digit
           closest to the radix point, continuing right). We&#39;ll use the following to denote the positions of a number
           after the radix point:</p>
         <ul>
           <li><em>p<sub>0</sub></em></li>
-          <li>. (radix point) [positions below this are the fractional part of the number]</li>
+          <li>. (radix point) [positions after this are the fractional part of the number]</li>
           <li><em>p<sub>-1</sub></em></li>
           <li><em>p<sub>-2</sub></em></li>
           <li><em>...</em></li>
@@ -131,12 +121,12 @@
         </ul>
         <p>Meaning the left-most digit closest to the radix point is at postition <em>p<sub>-1</sub></em>, the next
           digit to the right is at postition <em>p<sub>-2</sub></em>, and so forth. With that, just as before, we can
-          express the value given to each position as follows. The value of:</p>
+          express the value given to each fractional position as follows. The value of:</p>
         <ul>
-          <li><em>p<sub>-1</sub></em> is <em>b<sup>-1</sup></em></li>
-          <li><em>p<sub>-2</sub></em> is <em>b<sup>-2</sup></em></li>
+          <li><em>p<sub>-1</sub></em> is equal to <em>b<sup>-1</sup></em></li>
+          <li><em>p<sub>-2</sub></em> is equal to <em>b<sup>-2</sup></em></li>
           <li><em>...</em></li>
-          <li><em>p<sub>-N</sub></em> is <em>b<sup>-N</sup></em></li>
+          <li><em>p<sub>-N</sub></em> is equal to <em>b<sup>-N</sup></em></li>
         </ul>
         <p>As you can see above, the powers of the base used to give value to each position after the radix point are
           negative powers starting at -1.</p>
