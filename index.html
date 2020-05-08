@@ -106,7 +106,7 @@
         <p>Let&#39;s explore the concepts introduced above and see how we could devise our own base-4 numeral system.
           For simplicity&#39;s sake we are only going to allow positive whole number values to be represented in our
           system, so we will not have to deal with any negative or fractional values. We will also just show a method of
-          converting our base-4 numbers to their decimal equivalents using JavaScript.</p>
+          converting string versions of our base-4 numbers to their decimal equivalents using JavaScript.</p>
         <p>First, we will determine the symbols that will be used to represent our digits. We can use the letters A, B,
           C, and D. Then we will give each symbol a value, 0, 1, 2, and 3 respectively.</p>
         <p>It should be noted, we could just use the symbols &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, and &#39;3&#39; for
@@ -114,71 +114,83 @@
           we could have used any letters or symbols available to us on a keyboard as our symbols for representing the
           values from 0 to 3. We shall keep it simple though and stick with A - D.</p>
         <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertBase4StrToDecimal</span><span class="hljs-params">(str)</span> {</span>
-  <span class="hljs-built_in">let</span> total = <span class="hljs-number">0</span>;
+<span class="hljs-built_in">let</span> total = <span class="hljs-number">0</span>;
 
-  <span class="hljs-comment">// Using an object to represent our digits</span>
-  <span class="hljs-comment">// and their values, with the object properties</span>
-  <span class="hljs-comment">// representing each symbol used for a digit and</span>
-  <span class="hljs-comment">// the object property values representing the</span>
-  <span class="hljs-comment">// digit's value.</span>
-  const digits = {
-    A: <span class="hljs-number">0</span>, <span class="hljs-comment">// A = 0</span>
-    B: <span class="hljs-number">1</span>, <span class="hljs-comment">// B = 1</span>
-    C: <span class="hljs-number">2</span>, <span class="hljs-comment">// c = 2</span>
-    D: <span class="hljs-number">3</span>, <span class="hljs-comment">// D = 3</span>
-  };
+<span class="hljs-comment">// Our base-4 digits and values</span>
+const digits = {
+  A: <span class="hljs-number">0</span>, <span class="hljs-comment">// A = 0</span>
+  B: <span class="hljs-number">1</span>, <span class="hljs-comment">// B = 1</span>
+  C: <span class="hljs-number">2</span>, <span class="hljs-comment">// c = 2</span>
+  D: <span class="hljs-number">3</span>, <span class="hljs-comment">// D = 3</span>
+};
 
-  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">let</span> power = <span class="hljs-number">0</span>; power &lt; <span class="hljs-built_in">str</span>.length; power++) {
-    <span class="hljs-comment">// Get the index of the current digit's position</span>
-    <span class="hljs-comment">// starting from the right-side.</span>
-    <span class="hljs-built_in">let</span> index = <span class="hljs-built_in">str</span>.length - (power + <span class="hljs-number">1</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">str</span>.length; i++) {
+  <span class="hljs-comment">// Calc index for next digit from right</span>
+  <span class="hljs-built_in">let</span> index = <span class="hljs-built_in">str</span>.length - (i + <span class="hljs-number">1</span>);
 
-    <span class="hljs-comment">// Get the digit at that position.</span>
-    <span class="hljs-built_in">let</span> digit = <span class="hljs-built_in">str</span>[index];
+  <span class="hljs-comment">// Get the digit at that position</span>
+  <span class="hljs-built_in">let</span> digit = <span class="hljs-built_in">str</span>[index];
 
-    <span class="hljs-comment">// Get the value of that digit</span>
-    <span class="hljs-built_in">let</span> value = digits[digit];
+  <span class="hljs-comment">// Get the value of that digit</span>
+  <span class="hljs-built_in">let</span> value = digits[digit];
 
-    <span class="hljs-comment">// If the digit is not a valid symbol in our</span>
-    <span class="hljs-comment">// system, then return NaN.</span>
-    <span class="hljs-keyword">if</span> (value === NaN) {
-      return value;
-    }
-
-    <span class="hljs-comment">// Keep a tally of the product of each digit's</span>
-    <span class="hljs-comment">// value and a power of 4 based on the digit's</span>
-    <span class="hljs-comment">// position. (e.g. ones position: 4^0; fours </span>
-    <span class="hljs-comment">// position: 4^1, sixteens position: 4^2, etc.)</span>
-    total += value * Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">4</span>, power);
+  <span class="hljs-comment">// Return NaN if digit is not valid</span>
+  <span class="hljs-keyword">if</span> (value === NaN) {
+    return value;
   }
 
-  return total;
+  <span class="hljs-comment">// Calc digit's individual value</span>
+  <span class="hljs-built_in">let</span> digitValue = value * Math.<span class="hljs-built_in">pow</span>(<span class="hljs-number">4</span>, i);
+
+  <span class="hljs-comment">// Tally each individual digit's value</span>
+  total += digitValue;
+}
+
+return total;
 }
 
 <span class="hljs-built_in">let</span> <span class="hljs-built_in">log</span> = console.<span class="hljs-built_in">log</span>;
 
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"1"</span>)); <span class="hljs-comment">// output: NaN</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"E"</span>)); <span class="hljs-comment">// output: NaN</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"1"</span>));
+<span class="hljs-comment">// output: NaN</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"E"</span>));
+<span class="hljs-comment">// output: NaN</span>
 
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"A"</span>)); <span class="hljs-comment">// output: 0</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"B"</span>)); <span class="hljs-comment">// output: 1</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"C"</span>)); <span class="hljs-comment">// output: 2</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"D"</span>)); <span class="hljs-comment">// output: 3</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BA"</span>)); <span class="hljs-comment">// output: 4</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BB"</span>)); <span class="hljs-comment">// output: 5</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BC"</span>)); <span class="hljs-comment">// output: 6</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BD"</span>)); <span class="hljs-comment">// output: 7</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CA"</span>)); <span class="hljs-comment">// output: 8</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CB"</span>)); <span class="hljs-comment">// output: 9</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CC"</span>)); <span class="hljs-comment">// output: 10</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CD"</span>)); <span class="hljs-comment">// output: 11</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DA"</span>)); <span class="hljs-comment">// output: 12</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DB"</span>)); <span class="hljs-comment">// output: 13</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DC"</span>)); <span class="hljs-comment">// output: 14</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DD"</span>)); <span class="hljs-comment">// output: 15</span>
-<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BAA"</span>)); <span class="hljs-comment">// output: 16</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"A"</span>));
+<span class="hljs-comment">// output: 0</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"B"</span>));
+<span class="hljs-comment">// output: 1</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"C"</span>));
+<span class="hljs-comment">// output: 2</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"D"</span>));
+<span class="hljs-comment">// output: 3</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BA"</span>));
+<span class="hljs-comment">// output: 4</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BB"</span>));
+<span class="hljs-comment">// output: 5</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BC"</span>));
+<span class="hljs-comment">// output: 6</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BD"</span>));
+<span class="hljs-comment">// output: 7</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CA"</span>));
+<span class="hljs-comment">// output: 8</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CB"</span>));
+<span class="hljs-comment">// output: 9</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CC"</span>));
+<span class="hljs-comment">// output: 10</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"CD"</span>));
+<span class="hljs-comment">// output: 11</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DA"</span>));
+<span class="hljs-comment">// output: 12</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DB"</span>));
+<span class="hljs-comment">// output: 13</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DC"</span>));
+<span class="hljs-comment">// output: 14</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"DD"</span>));
+<span class="hljs-comment">// output: 15</span>
+<span class="hljs-built_in">log</span>(convertBase4StrToDecimal(<span class="hljs-string">"BAA"</span>));
+<span class="hljs-comment">// output: 16</span>
 </code></pre>
-
       </section>
       <section id="Decimal_Numeral_System" class="main-section">
         <header>
