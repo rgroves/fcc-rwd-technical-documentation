@@ -100,7 +100,46 @@
           <em>d<sub>N</sub></em>.</p>
         <p><em>t = (d<sub>N</sub> * b<sup>N</sup>) + ... + (d<sub>2</sub> * b<sup>2</sup>) + (d<sub>1</sub> *
             b<sup>1</sup>) + (d<sub>0</sub> * b<sup>0</sup>)</em></p>
-
+        <p>To see a more concrete example, we&#39;ll calculate the total decimal (base-10) value of the following base-4
+          number: <code>2301<sub>b<sup>4<sup></sub></code></p>
+        <p>Using the forumula from above, we will first remove the elipsis and revise the formula for our number which
+          as only 4 digits in it and has a base of 4 (<em>b</em>=4):</p>
+        <p><em>t = (d<sub>3</sub> * 4<sup>3</sup>) + (d<sub>2</sub> * 4<sup>2</sup>) + (d<sub>1</sub> * 4<sup>1</sup>) +
+            (d<sub>0</sub> * 4<sup>0</sup>)</em></p>
+        <p>Next, we substitute the digits (d<sub>0</sub> = 1, d<sub>1</sub> = 0, etc.):</p>
+        <p><em>t = (2 * 4<sup>3</sup>) + (3 * 4<sup>2</sup>) + (0 * 4<sup>1</sup>) + (1 * 4<sup>0</sup>)</em></p>
+        <p>Then, further simplify:</p>
+        <p><em>t = (2 * 64) + (3 * 16) + (0 * 4) + (1 * 1)</em></p>
+        <p><em>t = 128 + 48 + 0 + 1</em></p>
+        <p><em>t = 177 (base-10)</em></p>
+        <h3 id="fractional-values">Fractional Values</h3>
+        <p>We didn&#39;t talk about fractional values yet, and to keep this overview light we will briefly reivew that
+          here. To represent a fractional part of a number in a positional numeral system a <em>radix point</em> is used
+          before the fractional part of the number. In base-10 (decmial) the radix point is commonly referred to as the
+          <em>decimal point</em>. The value of digits that come after the radix point are calculated in a similar manner
+          to that described above, with the differences noted below.</p>
+        <p>When determining the positions after the radix point, you go from left-to-right (i.e. start with the digit
+          closest to the radix point, continuing right). We&#39;ll use the following to denote the positions of a number
+          after the radix point:</p>
+        <ul>
+          <li><em>p<sub>0</sub></em></li>
+          <li>. (radix point) [positions below this are the fractional part of the number]</li>
+          <li><em>p<sub>-1</sub></em></li>
+          <li><em>p<sub>-2</sub></em></li>
+          <li><em>...</em></li>
+          <li><em>p<sub>-N</sub></em></li>
+        </ul>
+        <p>Meaning the left-most digit closest to the radix point is at postition <em>p<sub>-1</sub></em>, the next
+          digit to the right is at postition <em>p<sub>-2</sub></em>, and so forth. With that, just as before, we can
+          express the value given to each position as follows. The value of:</p>
+        <ul>
+          <li><em>p<sub>-1</sub></em> is <em>b<sup>-1</sup></em></li>
+          <li><em>p<sub>-2</sub></em> is <em>b<sup>-2</sup></em></li>
+          <li><em>...</em></li>
+          <li><em>p<sub>-N</sub></em> is <em>b<sup>-N</sup></em></li>
+        </ul>
+        <p>As you can see above, the powers of the base used to give value to each position after the radix point are
+          negative powers starting at -1.</p>
         <h3 id="concepts-in-practice-devising-a-base-4-numeral-system">Concepts in Practice: Devising a Base-4 Numeral
           System</h3>
         <p>Let&#39;s explore the concepts introduced above and see how we could devise our own base-4 numeral system.
@@ -113,7 +152,7 @@
           this system, but this shows that the digits used in the system are independent of the system itself. In fact,
           we could have used any letters or symbols available to us on a keyboard as our symbols for representing the
           values from 0 to 3. We shall keep it simple though and stick with A - D.</p>
-        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertBase4StrToDecimal</span><span class="hljs-params">(str)</span> {</span>
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">base4StrToDecimal</span><span class="hljs-params">(str)</span> {</span>
 <span class="hljs-built_in">let</span> total = <span class="hljs-number">0</span>;
 
 <span class="hljs-comment">// Our base-4 digits and values</span>
@@ -135,8 +174,8 @@ const digits = {
   <span class="hljs-built_in">let</span> value = digits[digit];
 
   <span class="hljs-comment">// Return NaN if digit is not valid</span>
-  <span class="hljs-keyword">if</span> (value === NaN) {
-    return value;
+  <span class="hljs-keyword">if</span> (value === undefined) {
+    return NaN;
   }
 
   <span class="hljs-comment">// Calc digit's individual value</span>
