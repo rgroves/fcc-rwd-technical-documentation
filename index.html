@@ -94,11 +94,13 @@
         <p>Now, to determine each digit&#39;s individual value, you take the value of the digit and multiply it by the
           value of the position where the digit is located in the number. By summing each digit&#39;s individual value,
           you get a number&#39;s total value.</p>
-        <p>In summary, to get the total value (<em>t</em>) for a number, you take the value of the digit (<em>d</em>)
-          at each position (<em>p<sub>N</sub></em>) and multiply it by the value of that position. In the notation below
-          we express the value of the digit at position <em>p<sub>N</sub></em> as <em>d<sub>p<sup>N</sup></sub></em></p>
-        <p><em>t = sum( (d<sub>p<sup>N</sup></sub> * b<sup>N</sup>) + ... + (d<sub>p<sup>2</sup></sub> * b<sup>2</sup>)
-            + (d<sub>p<sup>1</sup></sub> * b<sup>1</sup>) + (d<sub>p<sup>0</sup></sub> * b<sup>0</sup>) )</em></p>
+        <p>In summary, to get the total value (<em>t</em>) for a number, you take the value of the digit (<em>d</em>) at
+          each position (<em>p<sub>N</sub></em>) and multiply it by the value of that position. For simplicity, in the
+          notation below, we will express the value of a digit at position <em>p<sub>N</sub></em> as
+          <em>d<sub>N</sub></em>.</p>
+        <p><em>t = (d<sub>N</sub> * b<sup>N</sup>) + ... + (d<sub>2</sub> * b<sup>2</sup>) + (d<sub>1</sub> *
+            b<sup>1</sup>) + (d<sub>0</sub> * b<sup>0</sup>)</em></p>
+
         <h3 id="concepts-in-practice-devising-a-base-4-numeral-system">Concepts in Practice: Devising a Base-4 Numeral
           System</h3>
         <p>Let&#39;s explore the concepts introduced above and see how we could devise our own base-4 numeral system.
