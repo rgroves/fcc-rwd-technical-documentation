@@ -7,6 +7,8 @@
   --primary-light: #7f7eb2;
   --text-light: #fff;
   --text-dark: #000;
+
+  --toggle-menu-width: 280px;
 }
 
 body {
@@ -98,9 +100,9 @@ nav {
   height: 100%;
   position: fixed;
   right: 0;
-  width: 250px;
+  width: var(--toggle-menu-width);
   margin-top: 60px;
-  transform: translateX(250px);
+  transform: translateX(var(--toggle-menu-width));
   transition: transform 0.25s ease-in-out;
   background: white; /*linear-gradient(180deg, #ddd 0%, 60%, #222 100%); */
   border: 1px black solid;
@@ -184,7 +186,7 @@ input[type="checkbox"]:checked ~ .navMenuToggleIcon > .hamburger-bottom {
     border-top-left-radius: 0;
     height: 100%;
     position: relative;
-    width: 250px;
+    width: var(--toggle-menu-width);
     margin-top: 0;
     transform: none;
     transition: none;
