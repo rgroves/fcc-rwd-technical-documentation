@@ -99,8 +99,9 @@ nav {
 /* Toggle Menu */
 #navMenu {
   border-top-left-radius: 1em;
-  height: 100%;
+  border-bottom-left-radius: 1em;
   position: fixed;
+  top: 0;
   right: 0;
   width: var(--toggle-menu-width);
   margin-top: 60px;
