@@ -393,19 +393,81 @@ Output:
         <header>
           <h2>Octal Numeral System</h2>
         </header>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nulla esse accusantium magnam odio, blanditiis perferendis ipsa illo ea commodi laboriosam non ipsum consequatur quibusdam libero quasi maiores asperiores consequuntur.</code>
-        <p>Octal number literals are represented using various notations. Here are a few examples by language:</p>
+        <p>The octal numeral system is a base-8 system. The eight numeral symbols used in the octal system are 0, 1, 2,
+          3, 4, 5, 6, 7.</p>
+        <p>The value contribution of each digit in a number can be expressed as:</p>
+        <p><em>(d<sub>N</sub> * 8<sup>N</sup>) + ... + (d<sub>2</sub> * 8<sup>2</sup>) + (d<sub>1</sub> * 8<sup>1</sup>)
+            + (d<sub>0</sub> * 8<sup>0</sup>)</em></p>
+        <p>There are various notations for indicating that a number is an octal number, here are some of the notable
+          ones:</p>
         <ul>
-          <li>Ex. 1</li>
-          <li>Ex. 2</li>
-          <li>Ex. 3</li>
+          <li>Explicitly stating &#39;octal&#39; after the number: 110 octal</li>
+          <li>Using &#39;oct&#39; before the number: oct 110</li>
+          <li>Using a (lowercase) o after the number: 110o</li>
+          <li>Prepend the literal &#39;0o&#39; to the number: 0o110</li>
+          <li>Using a subscript to indicate the base: 110<sub>8</sub></li>
         </ul>
+        <p>The value of octal 110 is decimal 72:</p>
+        <ul>
+          <li>1 * 64 or 1 * 8<sup>2</sup> or 1 sixty-fours</li>
+          <li>1 * 8 or 1 * 8<sup>1</sup> or 1 eights</li>
+          <li>0 * 1 or 0 * 8<sup>0</sup> or 0 ones</li>
+        </ul>
+        <h3 id="counting-in-octal">Counting in Octal</h3>
+        <p>When counting up from zero in octal, when you get to 7 in any position of a number—there is no numeral symbol
+          representing a value higher than 7—so you must change the 7 to a 0 in that position and carry a one over to
+          the next position to the left, repeating the carrying process as necessary.</p>
+        <ul>
+          <li>7 + 1 = 10</li>
+          <li>17 + 1 = 20</li>
+          <li>177 + 1 = 200</li>
+        </ul>
+        <h3 id="concepts-in-practice">Concepts in Practice</h3>
+        <pre><code class="lang-js"><span class="hljs-keyword">function</span> <span class="hljs-title">octalCountUpTo</span>(n) {
+  // <span class="hljs-keyword">Return</span> <span class="hljs-type">undefined</span> <span class="hljs-keyword">for</span> bad inputs
+  <span class="hljs-keyword">if</span> (!Number.isInteger(n) || n &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> undefined;
+  }
+
+  // Process from <span class="hljs-number">0</span> to n
+  <span class="hljs-keyword">for</span> (let i = <span class="hljs-number">0</span>; i &lt;= n; i++) {
+    let octVal = [];
+    let curVal = i;
+
+    // convert the current value to octal
+    <span class="hljs-keyword">do</span> {
+      octVal.push(curVal % <span class="hljs-number">8</span>);
+      curVal = Math.floor(curVal / <span class="hljs-number">8</span>);
+    } <span class="hljs-keyword">while</span> (curVal &gt;= <span class="hljs-number">1</span>);
+
+    console.log(`${octVal.<span class="hljs-keyword">reverse</span>().join(<span class="hljs-string">""</span>)} octal <span class="hljs-keyword">is</span> ${i} decimal`);
+  }
+}
+
+octalCountUpTo(<span class="hljs-number">16</span>);
+
+/*
+Output:
+
+<span class="hljs-number">0</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> decimal
+<span class="hljs-number">1</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">1</span> decimal
+<span class="hljs-number">2</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">2</span> decimal
+<span class="hljs-number">3</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">3</span> decimal
+<span class="hljs-number">4</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">4</span> decimal
+<span class="hljs-number">5</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">5</span> decimal
+<span class="hljs-number">6</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">6</span> decimal
+<span class="hljs-number">7</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">7</span> decimal
+<span class="hljs-number">10</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">8</span> decimal
+<span class="hljs-number">11</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">9</span> decimal
+<span class="hljs-number">12</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">10</span> decimal
+<span class="hljs-number">13</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">11</span> decimal
+<span class="hljs-number">14</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">12</span> decimal
+<span class="hljs-number">15</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">13</span> decimal
+<span class="hljs-number">16</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">14</span> decimal
+<span class="hljs-number">17</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">15</span> decimal
+<span class="hljs-number">20</span> octal <span class="hljs-keyword">is</span> <span class="hljs-number">16</span> decimal
+*/
+</code></pre>
       </section>
       <section id="Hexadecimal_Numeral_System" class="main-section">
         <header>
