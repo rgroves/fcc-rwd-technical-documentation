@@ -227,92 +227,120 @@ return total;
         <header>
           <h2>Decimal Numeral System</h2>
         </header>
-        <p>The decimal numeral system is a base-10 system. The ten numeral symbols used in the decimal system are 0, 1,
-          2, 3, 4, 5, 6, 7, 8, and 9.</p>
-        <p>When using the decimal numeral system we can think of the value contribution of each digit in the following
-          terms:</p>
-        <p><em>(d<sub>N</sub> * 10<sup>N</sup>) + ... + (d<sub>2</sub> * 10<sup>2</sup>) + (d<sub>1</sub> *
-            10<sup>1</sup>) + (d<sub>0</sub> * 10<sup>0</sup>) . (d<sub>-1</sub> * 10<sup>-1</sup>) + (d<sub>-2</sub> *
-            10<sup>-2</sup>) + ... + (d<sub>-N</sub> * -N<sup>0</sup>)</em></p>
-        <p>Generally speaking, people are so familiar and used to working with decimal numbers that they don&#39;t often
-          think in terms of the individual digits and their values in terms of contributing to the number as a hole.
-          Take the number 632. You see that and you likely just intuitively think six-hundred and thirty-two. You
-          probably don&#39;t think about it in terms of: 2 ones and 3 tens and 6 hundreds—but that is the way to break
-          it down when thinking in terms of the decimal numeral system.</p>
+        <p>The decimal numeral system is a base-10 system. The ten numeral symbols used in the decimal system are <span
+            class="numeral-symbol">0</span>, <span class="numeral-symbol">1</span>, <span
+            class="numeral-symbol">2</span>, <span class="numeral-symbol">3</span>, <span
+            class="numeral-symbol">4</span>, <span class="numeral-symbol">5</span>, <span
+            class="numeral-symbol">6</span>, <span class="numeral-symbol">7</span>, <span
+            class="numeral-symbol">8</span>, and <span class="numeral-symbol">9</span>.</p>
+        <p>When using the decimal numeral system, the value contribution of each digit in a number can be expressed in
+          the following terms:</p>
+        <pre
+          class="math"><var>d<sub>N</sub></var>(10<sup>N</sup>) + ... + <var>d<sub>2</sub></var>(10<sup>2</sup>) + <var>d<sub>1</sub></var>(10<sup>1</sup>) + <var>d<sub>0</sub></var>(10<sup>0</sup>)
+.<var>d<sub>-1</sub></var>(10<sup>-1</sup>) + <var>d<sub>-2</sub></var>(10<sup>-2</sup>) + ... + <var>d<sub>-N</sub></var>(10<sup>-N</sup>)</pre>
+
+        <p>People who are used to working with decimal numbers may not often think in terms of individual digit values
+          and their contribution to the total value of the number. Take the number <span class="number">632</span>. You
+          may read that and intuitively say, six-hundred and thirty-two. You probably did not think about it in terms of
+          the number having: <span class="math">2 ones</span> and <span class="math">3 tens</span> and <span
+            class="math">6 hundreds</span>—but that is the way to break down the value of a number when thinking in
+          terms of a positional numeral system—specifically in this case, the decimal system.</p>
+        <p>The value of decimal number <span class="number">632</span> is six-hundred and thirty-two because that is the
+          total sum of each contributing digit&#39;s value:</p>
         <ul>
-          <li>6 * 100 or 6(10<sup>2</sup>) or 6 hundreds</li>
-          <li>3 * 10 or 3(10<sup>1</sup>) or 3 tens</li>
-          <li>2 * 1 or 2(10<sup>0</sup>) or 2 ones</li>
+          <li><span class="math">6(10<sup>2</sup>)</span> or <span class="math">6(100)</span> or <span class="math">6
+              hundreds</span> or <span class="math">600</span></li>
+          <li><span class="math">3(10<sup>1</sup>)</span> or <span class="math">3(10)</span> or <span class="math">3
+              tens</span> or <span class="math">30</span></li>
+          <li><span class="math">2(10<sup>0</sup>)</span> or <span class="math">2(1)</span> or <span class="math">2
+              ones</span> or <span class="math">2</span></li>
         </ul>
         <h3 id="counting-in-decimal">Counting in Decimal</h3>
-        <p>If you start from 0 and continuously count up by one, once you get to 9 in any position of a number—there is
-          no numeral symbol representing a value higher than 9—so you must change the 9 to a 0 in that position and
-          carry a one over to the next position to the left, repeating the carrying process as necessary.</p>
+        <p>If you start from <span class="number">0</span> and continuously count up by one, once you get to <span
+            class="number">9</span> in any position of a number—there is no numeral symbol representing a value higher
+          than <span class="number">9</span>—so you must change the <span class="number">9</span> to a <span
+            class="number">0</span> in that position and carry a one over to the next position to the left, repeating
+          the carrying process as necessary.</p>
         <ul>
-          <li>9 + 1 = 10</li>
-          <li>99 + 1 = 10</li>
-          <li>999 + 1 = 1000</li>
+          <li><span class="math">9 + 1 = 10</span></li>
+          <li><span class="math">99 + 1 = 10</span></li>
+          <li><span class="math">999 + 1 = 1000</span></li>
         </ul>
-        <h3 id="concepts-in-practice">Concepts in Practice</h3>
-        <p>Thinking about numbers in the ways described above will hopefully make comprehending the other numeral
-          systems we will talk about a little easier. For now let&#39;s put the concepts above in practice by writing a
-          function in JavaScript that will take a number and break it down by each digits individual contributing value.
+        <h3 id="concepts-in-practice-breaking-down-a-decimal-number">Concepts in Practice: Breaking Down a Decimal
+          Number</h3>
+        <p>Thinking about numbers in the ways described above should hopefully make comprehending the other numeral
+          systems we will talk about a little easier. For now, we can put the concepts above in practice by writing a
+          function—using JavaScript—that will take a whole number (from <span class="number">0</span> to <span
+            class="number">999,999,999,999</span>) and break it down by the individual contributing value of each digit.
         </p>
-        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decimalBreakdown</span>(<span class="hljs-params">n</span>) </span>{
-<span class="hljs-comment">// Return undefined if not a positive whole number less</span>
-<span class="hljs-comment">// than 1 trillion</span>
-<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Number</span>.isInteger(n) || n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999</span>_999_999_999) {
-  <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+        <pre><code class="lang-js"><span class="hljs-keyword">function</span> <span class="hljs-title">decimalBreakdown</span>(n) {
+  // <span class="hljs-keyword">Return</span> <span class="hljs-type">undefined</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> a positive whole number less
+  // than <span class="hljs-number">1</span> trillion
+  <span class="hljs-keyword">if</span> (!Number.isInteger(n) || n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999_999_999_999</span>) {
+    <span class="hljs-keyword">return</span> undefined;
+  }
+
+  // <span class="hljs-keyword">Array</span> <span class="hljs-keyword">with</span> descriptions <span class="hljs-keyword">of</span> number place names
+  const placeNames = [
+    <span class="hljs-string">"ones"</span>,
+    <span class="hljs-string">"tens"</span>,
+    <span class="hljs-string">"hundreds"</span>,
+    <span class="hljs-string">"thousands"</span>,
+    <span class="hljs-string">"ten-thousands"</span>,
+    <span class="hljs-string">"hundred-thousands"</span>,
+    <span class="hljs-string">"millions"</span>,
+    <span class="hljs-string">"ten-millions"</span>,
+    <span class="hljs-string">"hundred-millions"</span>,
+    <span class="hljs-string">"billions"</span>,
+    <span class="hljs-string">"ten-billions"</span>,
+    <span class="hljs-string">"hundred-billions"</span>,
+  ];
+
+  // Convert number to <span class="hljs-keyword">array</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">digits</span> reversed
+  let valueStr = n.toString().split(<span class="hljs-string">""</span>).<span class="hljs-keyword">reverse</span>();
+
+  // <span class="hljs-keyword">Array</span> to hold the breakdown <span class="hljs-keyword">of</span> each digit
+  let breakdown = [];
+
+  valueStr.forEach((element, i) =&gt; {
+    let digitByValue = `${element}(<span class="hljs-number">10</span>^${i})`;
+    let digitByPlace = `${element} ${placeNames[i]}`;
+    breakdown.push(`${digitByValue}) <span class="hljs-keyword">or</span> ${digitByPlace}`);
+  });
+
+  // <span class="hljs-keyword">return</span> the breakdown <span class="hljs-keyword">of</span> the number as a multi-line
+  // string.
+  console.log(breakdown.<span class="hljs-keyword">reverse</span>().join(<span class="hljs-string">" +\n"</span>));
 }
 
-<span class="hljs-comment">// Array with descriptions of number place names</span>
-<span class="hljs-keyword">const</span> placeNames = [
-  <span class="hljs-string">"ones"</span>,
-  <span class="hljs-string">"tens"</span>,
-  <span class="hljs-string">"hundreds"</span>,
-  <span class="hljs-string">"thousands"</span>,
-  <span class="hljs-string">"ten-thousands"</span>,
-  <span class="hljs-string">"hundred-thousands"</span>,
-  <span class="hljs-string">"millions"</span>,
-  <span class="hljs-string">"ten-millions"</span>,
-  <span class="hljs-string">"hundred-millions"</span>,
-  <span class="hljs-string">"billions"</span>,
-  <span class="hljs-string">"ten-billions"</span>,
-  <span class="hljs-string">"hundred=billions"</span>,
-];
+decimalBreakdown(<span class="hljs-number">312</span>);
+/* Output:
+  <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
+  <span class="hljs-number">1</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">1</span> tens +
+  <span class="hljs-number">2</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">2</span> ones
+*/
 
-<span class="hljs-comment">// Array with descriptions of number place values</span>
-<span class="hljs-keyword">const</span> placeValues = [
-  <span class="hljs-string">"(10^0)"</span>,
-  <span class="hljs-string">"(10^1)"</span>,
-  <span class="hljs-string">"(10^2)"</span>,
-  <span class="hljs-string">"(10^3)"</span>,
-  <span class="hljs-string">"(10^4)"</span>,
-  <span class="hljs-string">"(10^5)"</span>,
-  <span class="hljs-string">"(10^6)"</span>,
-  <span class="hljs-string">"(10^7)"</span>,
-  <span class="hljs-string">"(10^8)"</span>,
-  <span class="hljs-string">"(10^9)"</span>,
-  <span class="hljs-string">"(10^10)"</span>,
-  <span class="hljs-string">"(10^11)"</span>,
-];
+decimalBreakdown(<span class="hljs-number">8_675_309</span>);
+/* Output:
+   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">6</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> millions +
+   <span class="hljs-number">6</span>(<span class="hljs-number">10</span>^<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">6</span> hundred-thousands +
+   <span class="hljs-number">7</span>(<span class="hljs-number">10</span>^<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">7</span> ten-thousands +
+   <span class="hljs-number">5</span>(<span class="hljs-number">10</span>^<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> thousands +
+   <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
+   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> tens +
+   <span class="hljs-number">9</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">9</span> ones
+*/
 
-<span class="hljs-comment">// Convert number to array with digits reversed</span>
-<span class="hljs-keyword">let</span> valueStr = n.toString().split(<span class="hljs-string">""</span>).reverse();
-
-<span class="hljs-comment">// Array to hold the breakdown of each digit</span>
-<span class="hljs-keyword">let</span> breakdown = [];
-
-valueStr.forEach(<span class="hljs-function">(<span class="hljs-params">element, i</span>) =&gt;</span> {
-  <span class="hljs-keyword">let</span> digitByPlace = <span class="hljs-string">`<span class="hljs-subst">${element}</span> <span class="hljs-subst">${placeNames[i]}</span>`</span>;
-  <span class="hljs-keyword">let</span> digitByValue = <span class="hljs-string">`<span class="hljs-subst">${element}</span><span class="hljs-subst">${placeValues[i]}</span>`</span>;
-  breakdown.push(<span class="hljs-string">`<span class="hljs-subst">${digitByPlace}</span> or <span class="hljs-subst">${digitByValue}</span>`</span>);
-});
-
-<span class="hljs-comment">// return the breakdown of the number as a multi-line</span>
-<span class="hljs-comment">// string.</span>
-<span class="hljs-keyword">return</span> breakdown.reverse().join(<span class="hljs-string">"\n"</span>);
-}
+decimalBreakdown(<span class="hljs-number">5_882_300</span>);
+/* Output:
+   <span class="hljs-number">5</span>(<span class="hljs-number">10</span>^<span class="hljs-number">6</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> millions +
+   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> hundred-thousands +
+   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> ten-thousands +
+   <span class="hljs-number">2</span>(<span class="hljs-number">10</span>^<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">2</span> thousands +
+   <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
+   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> tens +
+   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> ones
+*/
 </code></pre>
       </section>
       <section id="Binary_Numeral_System" class="main-section">
