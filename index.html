@@ -473,19 +473,126 @@ Output:
         <header>
           <h2>Hexadecimal Numeral System</h2>
         </header>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sequi assumenda distinctio id modi hic
-          laudantium voluptatibus soluta culpa? Expedita quasi molestias perspiciatis libero distinctio veniam ratione
-          perferendis, sint vero?</p>
-        <code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nulla esse accusantium magnam odio, blanditiis perferendis ipsa illo ea commodi laboriosam non ipsum consequatur quibusdam libero quasi maiores asperiores consequuntur.</code>
-        <p>Hexadecimal number literals are represented using various notations. Here are a few examples by language:</p>
+        <p>The hexadecimal numeral system is a base-16 system. The sixteen numeral symbols used in the hexadecimal
+          system are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F. That&#39;s right, remember back in the section
+          reviewing positional notation systems when you were asked to keep in mind numeral symbols can be letters?
+          Well, the hexadecimal system uses just that for the values from 10 to 15—the letters A through F are used
+          (respectively) to represent those values. This means that the hexadecimal symbol A is equivalent in value to
+          the decimal number 10, hexadecimal symbol B to the decimal number 11, hexadecimal symbol C to the decimal
+          number 12, and so on.</p>
+        <p>The value contribution of each digit in a hexidecimal number can be expressed as:</p>
+        <p>
+          <code><em>d<sub>N</sub>(16<sup>N</sup>) + ... + d<sub>2</sub>(16<sup>2</sup>) + d<sub>1</sub>(16<sup>1</sup>) + d<sub>0</sub>(16<sup>0</sup>)</em></code>
+        </p>
+        <p>There are various notations for indicating that a number is an hexadecimal number, here are some of the
+          notable ones:</p>
         <ul>
-          <li>Ex. 1</li>
-          <li>Ex. 2</li>
-          <li>Ex. 3</li>
+          <li>Explicitly stating &#39;<code>hexadecimal</code>&#39; after the number: <code>AB3 hexadecimal</code></li>
+          <li>Using &#39;<code>hex</code>&#39; before the number: <code>hex AB3</code></li>
+          <li>Using a (lowercase) <code>h</code> after the number: <code>AB3h</code></li>
+          <li>Prepend the literal &#39;<code>0x</code>&#39; to the number: <code>0xAB3</code></li>
+          <li>Using a subscript to indicate the base: <code>AB3<sub>16</sub></code></li>
         </ul>
+        <p>The value of hexadecimal number <code>AB3</code> is decimal 2739 because that is the total sum of each
+          contributing digit&#39;s value:</p>
+        <ul>
+          <li><code>A * 256</code> or <code>A * 16<sup>2</sup></code> or <code>10 two-hundred and fifty-sixes</code>
+          </li>
+          <li><code>B * 16</code> or <code>B * 16<sup>1</sup></code> or <code>11 sixteens</code></li>
+          <li><code>3 * 1</code> or <code>3 * 16<sup>0</sup></code> or <code>3 ones</code></li>
+        </ul>
+        <h3 id="counting-in-hexadecimal">Counting in Hexadecimal</h3>
+        <p>When counting up from zero in hexadecimal, when you get to F in any position of a number—there is no numeral
+          symbol representing a value higher than F—so you must change the F to a 0 in that position and carry a one
+          over to the next position to the left, repeating the carrying process as necessary.</p>
+        <ul>
+          <li><code>F + 1 = 10</code></li>
+          <li><code>1F + 1 = 20</code></li>
+          <li><code>1FF + 1 = 200</code></li>
+        </ul>
+        <h3 id="concepts-in-practice">Concepts in Practice</h3>
+        <pre><code class="lang-js"><span class="hljs-keyword">function</span> <span class="hljs-title">hexadecimalCountUpTo</span>(n) {
+  // <span class="hljs-keyword">Return</span> <span class="hljs-type">undefined</span> <span class="hljs-keyword">for</span> bad inputs
+  <span class="hljs-keyword">if</span> (!Number.isInteger(n) || n &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> undefined;
+  }
+
+  const <span class="hljs-keyword">digits</span> = [
+    <span class="hljs-string">"0"</span>,
+    <span class="hljs-string">"1"</span>,
+    <span class="hljs-string">"2"</span>,
+    <span class="hljs-string">"3"</span>,
+    <span class="hljs-string">"4"</span>,
+    <span class="hljs-string">"5"</span>,
+    <span class="hljs-string">"6"</span>,
+    <span class="hljs-string">"7"</span>,
+    <span class="hljs-string">"8"</span>,
+    <span class="hljs-string">"9"</span>,
+    <span class="hljs-string">"A"</span>,
+    <span class="hljs-string">"B"</span>,
+    <span class="hljs-string">"C"</span>,
+    <span class="hljs-string">"D"</span>,
+    <span class="hljs-string">"E"</span>,
+    <span class="hljs-string">"F"</span>,
+  ];
+
+  // Process from <span class="hljs-number">0</span> to n
+  <span class="hljs-keyword">for</span> (let i = <span class="hljs-number">0</span>; i &lt;= n; i++) {
+    let hexVal = [];
+    let curVal = i;
+
+    // convert the current value to hexadecimal
+    <span class="hljs-keyword">do</span> {
+      hexVal.push(<span class="hljs-keyword">digits</span>[curVal % <span class="hljs-number">16</span>]);
+      curVal = Math.floor(curVal / <span class="hljs-number">16</span>);
+    } <span class="hljs-keyword">while</span> (curVal &gt;= <span class="hljs-number">1</span>);
+
+    let hexStr = hexVal.<span class="hljs-keyword">reverse</span>().join(<span class="hljs-string">""</span>);
+
+    console.log(`${hexStr} hexadecimal <span class="hljs-keyword">is</span> ${i} decimal`);
+  }
+}
+
+hexadecimalCountUpTo(<span class="hljs-number">32</span>);
+
+/*
+Output:
+<span class="hljs-number">0</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> decimal
+<span class="hljs-number">1</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">1</span> decimal
+<span class="hljs-number">2</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">2</span> decimal
+<span class="hljs-number">3</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">3</span> decimal
+<span class="hljs-number">4</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">4</span> decimal
+<span class="hljs-number">5</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">5</span> decimal
+<span class="hljs-number">6</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">6</span> decimal
+<span class="hljs-number">7</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">7</span> decimal
+<span class="hljs-number">8</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">8</span> decimal
+<span class="hljs-number">9</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">9</span> decimal
+A hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">10</span> decimal
+B hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">11</span> decimal
+C hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">12</span> decimal
+D hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">13</span> decimal
+E hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">14</span> decimal
+F hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">15</span> decimal
+<span class="hljs-number">10</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">16</span> decimal
+<span class="hljs-number">11</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">17</span> decimal
+<span class="hljs-number">12</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">18</span> decimal
+<span class="hljs-number">13</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">19</span> decimal
+<span class="hljs-number">14</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">20</span> decimal
+<span class="hljs-number">15</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">21</span> decimal
+<span class="hljs-number">16</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">22</span> decimal
+<span class="hljs-number">17</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">23</span> decimal
+<span class="hljs-number">18</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">24</span> decimal
+<span class="hljs-number">19</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">25</span> decimal
+<span class="hljs-number">1</span>A hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">26</span> decimal
+<span class="hljs-number">1</span>B hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">27</span> decimal
+<span class="hljs-number">1</span>C hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">28</span> decimal
+<span class="hljs-number">1</span>D hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">29</span> decimal
+<span class="hljs-number">1</span>E hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">30</span> decimal
+<span class="hljs-number">1</span>F hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">31</span> decimal
+<span class="hljs-number">20</span> hexadecimal <span class="hljs-keyword">is</span> <span class="hljs-number">32</span> decimal
+*/
+</code></pre>
+
       </section>
     </main>
   </div>
