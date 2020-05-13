@@ -54,55 +54,56 @@
           <em>digits</em>), in which each digit has a value that depends on its position within a number.</p>
         <p>For any number expressed using a modern positional system, you will need to know the <em>base</em> (or
           <em>radix</em>) of the system to determine the value that each individual digit contributes to the total value
-          of the number. The base is the number of unique digits used by the system. The letter <em>b</em> is the symbol
-          typically used as a notation for base. A base can also be indicated by using a phrase like <em>base-b</em>
-          (where <em>b</em> is the base number, e.g. <em>base-2</em>, <em>base-10</em>, etc.).</p>
+          of the number. The base is the number of unique digits used by the system. The letter <var>b</var> is the
+          symbol typically used as a notation for base. A base can also be indicated by using a phrase like
+          base-<var>b</var> (where <var>b</var> is the base number, e.g. <em>base-2</em>, <em>base-10</em>, etc.).</p>
         <p>For example, if we used the entire English alphabet as the digits of a positional system, that system would
           be a <em>base-26</em> system (because the English alphabet is a set of 26 letters) and each digit would have a
           value from 0 to 25 assigned to it. Note that the numeral symbols used do not have to be decimal digits. Keep
           this concept of using letters as digits in mind, as we will revisit it when we discuss the hexadecimal numeral
           system.</p>
         <p>Once the base is known, you can use it to determine the value of each position (or <em>place</em>) in a
-          number. Each position has a value assigned to it, expressed in powers of the base (<em>b<sup>x</sup></em>).
-          We&#39;ll use the following to denote the positions of a number, from left-to-right:</p>
+          number. Each position has a value assigned to it, expressed in powers of the base (<var>b<sup>x</sup></var>).
+          We will use the following to denote the positions of a number, from left-to-right:</p>
         <ul>
-          <li><em>p<sub>N</sub></em></li>
-          <li><em>...</em></li>
-          <li><em>p<sub>2</sub></em></li>
-          <li><em>p<sub>1</sub></em></li>
-          <li><em>p<sub>0</sub></em></li>
+          <li><var>p<sub>N</sub></var></li>
+          <li>...</li>
+          <li><var>p<sub>2</sub></var></li>
+          <li><var>p<sub>1</sub></var></li>
+          <li><var>p<sub>0</sub></var></li>
         </ul>
-        <p>Meaning the right-most digit is at postition <em>p<sub>0</sub></em>, the next digit to the left is at
-          postition <em>p<sub>1</sub></em>, and so forth. With that we can express the value given to each position as
+        <p>Meaning the right-most digit is at postition <var>p<sub>0</sub></var>, the next digit to the left is at
+          postition <var>p<sub>1</sub></var>, and so forth. With that we can express the value given to each position as
           follows. The value of:</p>
         <ul>
-          <li><em>p<sub>N</sub></em> is equal to <em>b<sup>N</sup></em></li>
-          <li><em>...</em></li>
-          <li><em>p<sub>2</sub></em> is equal to <em>b<sup>2</sup></em></li>
-          <li><em>p<sub>1</sub></em> is equal to <em>b<sup>1</sup></em></li>
-          <li><em>p<sub>0</sub></em> is equal to <em>b<sup>0</sup></em></li>
+          <li><var>p<sub>N</sub></var> is equal to <var>b<sup>N</sup></var></li>
+          <li>...</li>
+          <li><var>p<sub>2</sub></var> is equal to <var>b<sup>2</sup></var></li>
+          <li><var>p<sub>1</sub></var> is equal to <var>b<sup>1</sup></var></li>
+          <li><var>p<sub>0</sub></var> is equal to <var>b<sup>0</sup></var></li>
         </ul>
         <p>Now, to determine each digit&#39;s individual value, you take the value of the digit and multiply it by the
           value of the position where the digit is located in the number. By summing each digit&#39;s individual value,
           you get a number&#39;s total value.</p>
-        <p>In summary, to get the total value (<em>t</em>) for a number, you take the value of the digit (<em>d</em>) at
-          each position (<em>p<sub>N</sub></em>) and multiply it by the value of that position. For simplicity, in the
-          notation below, we will express the value of a digit at position <em>p<sub>N</sub></em> as
-          <em>d<sub>N</sub></em>.</p>
-        <p><em>t = (d<sub>N</sub> * b<sup>N</sup>) + ... + (d<sub>2</sub> * b<sup>2</sup>) + (d<sub>1</sub> *
-            b<sup>1</sup>) + (d<sub>0</sub> * b<sup>0</sup>)</em></p>
+        <p>In summary, to get the total value (<var>t</var>) for a number, you take the value of the digit
+          (<var>d</var>) at each position (<var>p<sub>N</sub></var>) and multiply it by the value of that position. For
+          simplicity, in the notation below, we will express the value of a digit at position <var>p<sub>N</sub></var>
+          as <var>d<sub>N</sub></var>.</p>
+        <p><var>t</var> = <var>d<sub>N</sub></var>(<var>b<sup>N</sup></var>) + ... +
+          <var>d<sub>2</sub></var>(<var>b<sup>2</sup></var>) + <var>d<sub>1</sub></var>(<var>b<sup>1</sup></var>) +
+          <var>d<sub>0</sub></var>(<var>b<sup>0</sup></var>)</p>
         <p>To see a more concrete example, we&#39;ll calculate the total decimal (base-10) value of the following base-4
-          number: <code>2301<sub>b<sup>4<sup></sub></code></p>
+          number: 2301<sub>b<sup>4</sup></sub></p>
         <p>Using the forumula from above, we will first remove the elipsis and revise the formula for our number which
-          as only 4 digits in it and has a base of 4 (<em>b</em>=4):</p>
-        <p><em>t = (d<sub>3</sub> * 4<sup>3</sup>) + (d<sub>2</sub> * 4<sup>2</sup>) + (d<sub>1</sub> * 4<sup>1</sup>) +
-            (d<sub>0</sub> * 4<sup>0</sup>)</em></p>
+          as only 4 digits in it and has a base of 4 (<var>b</var>=4):</p>
+        <p><var>t</var> = <var>d<sub>3</sub></var>(4<sup>3</sup>) + <var>d<sub>2</sub></var>(4<sup>2</sup>) +
+          <var>d<sub>1</sub></var>(4<sup>1</sup>) + <var>d<sub>0</sub></var>(4<sup>0</sup>)</p>
         <p>Next, we substitute the digits (d<sub>0</sub> = 1, d<sub>1</sub> = 0, etc.):</p>
-        <p><em>t = (2 * 4<sup>3</sup>) + (3 * 4<sup>2</sup>) + (0 * 4<sup>1</sup>) + (1 * 4<sup>0</sup>)</em></p>
+        <p><var>t</var> = 2(4<sup>3</sup>) + 3(4<sup>2</sup>) + 0(4<sup>1</sup>) + 1(4<sup>0</sup>)</p>
         <p>Then, further simplify:</p>
-        <p><em>t = (2 * 64) + (3 * 16) + (0 * 4) + (1 * 1)</em></p>
-        <p><em>t = 128 + 48 + 0 + 1</em></p>
-        <p><em>t = 177 (base-10)</em></p>
+        <p><var>t</var> = 2(64) + 3(16) + 0(4) + 1(1)</p>
+        <p><var>t</var> = 128 + 48 + 0 + 1</p>
+        <p><var>t</var> = 177 base-10</p>
         <h3 id="fractional-values">Fractional Values</h3>
         <p>We haven&#39;t talk about fractional values yet. To represent a fractional part of a number in a positional
           numeral system a <em>radix point</em> is used before the fractional part of the number. In base-10 (decmial)
@@ -112,24 +113,25 @@
           closest to the radix point, continuing right). We&#39;ll use the following to denote the positions of a number
           after the radix point:</p>
         <ul>
-          <li><em>p<sub>0</sub></em></li>
+          <li><var>p<sub>0</sub></var></li>
           <li>. (radix point) [positions after this are the fractional part of the number]</li>
-          <li><em>p<sub>-1</sub></em></li>
-          <li><em>p<sub>-2</sub></em></li>
-          <li><em>...</em></li>
-          <li><em>p<sub>-N</sub></em></li>
+          <li><var>p<sub>-1</sub></var></li>
+          <li><var>p<sub>-2</sub></var></li>
+          <li>...</li>
+          <li><var>p<sub>-N</sub></var></li>
         </ul>
-        <p>Meaning the left-most digit closest to the radix point is at postition <em>p<sub>-1</sub></em>, the next
-          digit to the right is at postition <em>p<sub>-2</sub></em>, and so forth. With that, just as before, we can
+        <p>Meaning the left-most digit closest to the radix point is at postition <var>p<sub>-1</sub></var>, the next
+          digit to the right is at postition <var>p<sub>-2</sub></var>, and so forth. With that, just as before, we can
           express the value given to each fractional position as follows. The value of:</p>
         <ul>
-          <li><em>p<sub>-1</sub></em> is equal to <em>b<sup>-1</sup></em></li>
-          <li><em>p<sub>-2</sub></em> is equal to <em>b<sup>-2</sup></em></li>
-          <li><em>...</em></li>
-          <li><em>p<sub>-N</sub></em> is equal to <em>b<sup>-N</sup></em></li>
+          <li><var>p<sub>-1</sub></var> is equal to <var>b<sup>-1</sup></var></li>
+          <li><var>p<sub>-2</sub></var> is equal to <var>b<sup>-2</sup></var></li>
+          <li>...</li>
+          <li><var>p<sub>-N</sub></var> is equal to <var>b<sup>-N</sup></var></li>
         </ul>
         <p>As you can see above, the powers of the base used to give value to each position after the radix point are
           negative powers starting at -1.</p>
+
         <h3 id="concepts-in-practice-devising-a-base-4-numeral-system">Concepts in Practice: Devising a Base-4 Numeral
           System</h3>
         <p>Let&#39;s explore the concepts introduced above and see how we could devise our own base-4 numeral system.
