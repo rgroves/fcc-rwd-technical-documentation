@@ -96,6 +96,13 @@ nav {
   }
 }
 
+.math,
+.number,
+.numeral-symbol {
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+}
+
 /* Toggle Menu */
 #navMenu {
   border-top-left-radius: 1em;
