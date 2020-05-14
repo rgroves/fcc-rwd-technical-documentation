@@ -108,6 +108,7 @@ h3 ~ pre {
   line-height: 1.4em;
   background-color: #f8f8f8;
   border: 3px ridge #ddd;
+  overflow: auto;
 }
 
 /* Toggle Menu */

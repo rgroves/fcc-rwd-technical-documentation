@@ -296,9 +296,10 @@
             class="number">999,999,999,999</span>) and break it down by the individual contributing value of each digit.
         </p>
         <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decimalBreakdown</span>(<span class="hljs-params">n</span>) </span>{
-  <span class="hljs-comment">// Return undefined if not a positive whole number less</span>
-  <span class="hljs-comment">// than 1 trillion</span>
-  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Number</span>.isInteger(n) || n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999</span>_999_999_999) {
+  <span class="hljs-comment">// Return undefined if not a positive whole number</span>
+  <span class="hljs-comment">// less than 1 trillion</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Number</span>.isInteger(n) || 
+      n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999</span>_999_999_999) {
     <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
   }
 
@@ -327,11 +328,12 @@
   valueStr.forEach(<span class="hljs-function">(<span class="hljs-params">element, i</span>) =&gt;</span> {
     <span class="hljs-keyword">let</span> digitByValue = <span class="hljs-string">`<span class="hljs-subst">${element}</span>(10^<span class="hljs-subst">${i}</span>)`</span>;
     <span class="hljs-keyword">let</span> digitByPlace = <span class="hljs-string">`<span class="hljs-subst">${element}</span> <span class="hljs-subst">${placeNames[i]}</span>`</span>;
-    breakdown.push(<span class="hljs-string">`<span class="hljs-subst">${digitByValue}</span>) or <span class="hljs-subst">${digitByPlace}</span>`</span>);
+    breakdown.push(
+      <span class="hljs-string">`<span class="hljs-subst">${digitByValue}</span>) or <span class="hljs-subst">${digitByPlace}</span>`</span>);
   });
 
-  <span class="hljs-comment">// return the breakdown of the number as a multi-line</span>
-  <span class="hljs-comment">// string.</span>
+  <span class="hljs-comment">// return the breakdown of the number as a</span>
+  <span class="hljs-comment">// multi-line string.</span>
   <span class="hljs-built_in">console</span>.log(breakdown.reverse().join(<span class="hljs-string">" +\n"</span>));
 }
 
@@ -424,7 +426,8 @@ decimalBreakdown(<span class="hljs-number">5</span>_882_300);
       curVal = <span class="hljs-built_in">Math</span>.floor(curVal / <span class="hljs-number">2</span>);
     } <span class="hljs-keyword">while</span> (curVal &gt;= <span class="hljs-number">1</span>);
 
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${binVal.reverse().join(<span class="hljs-string">""</span>)}</span> binary is <span class="hljs-subst">${i}</span> decimal`</span>);
+    <span class="hljs-keyword">let</span> binStr = binVal.reverse().join(<span class="hljs-string">""</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${binStr}</span> binary is <span class="hljs-subst">${i}</span> decimal`</span>);
   }
 }
 
@@ -448,6 +451,7 @@ binaryCountUpTo(<span class="hljs-number">16</span>);
 <span class="hljs-comment">//  1111 binary is 15 decimal</span>
 <span class="hljs-comment">//  10000 binary is 16 decimal</span>
 </code></pre>
+
       </section>
       <section id="Octal_Numeral_System" class="main-section">
         <header>
@@ -510,7 +514,8 @@ binaryCountUpTo(<span class="hljs-number">16</span>);
       curVal = <span class="hljs-built_in">Math</span>.floor(curVal / <span class="hljs-number">8</span>);
     } <span class="hljs-keyword">while</span> (curVal &gt;= <span class="hljs-number">1</span>);
 
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${octVal.reverse().join(<span class="hljs-string">""</span>)}</span> octal is <span class="hljs-subst">${i}</span> decimal`</span>);
+    <span class="hljs-keyword">let</span> octStr = octVal.reverse().join(<span class="hljs-string">""</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${octStr}</span> octal is <span class="hljs-subst">${i}</span> decimal`</span>);
   }
 }
 
@@ -534,6 +539,7 @@ octalCountUpTo(<span class="hljs-number">16</span>);
 <span class="hljs-comment">//  17 octal is 15 decimal</span>
 <span class="hljs-comment">//  20 octal is 16 decimal</span>
 </code></pre>
+
 
       </section>
       <section id="Hexadecimal_Numeral_System" class="main-section">
