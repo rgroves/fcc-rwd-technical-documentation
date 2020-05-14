@@ -103,6 +103,13 @@ nav {
   font-size: smaller;
 }
 
+h3 ~ pre {
+  padding: 1.25em;
+  line-height: 1.4em;
+  background-color: #f8f8f8;
+  border: 3px ridge #ddd;
+}
+
 /* Toggle Menu */
 #navMenu {
   border-top-left-radius: 1em;
