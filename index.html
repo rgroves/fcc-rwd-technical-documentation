@@ -366,76 +366,87 @@ decimalBreakdown(<span class="hljs-number">5</span>_882_300);
         <header>
           <h2>Binary Numeral System</h2>
         </header>
-        <p>The binary numeral system is a base-2 system. The two numeral symbols used in the binary system are 0, 1.</p>
+        <p>The binary numeral system is a base-2 system. The two numeral symbols used in the binary system are <span
+            class="numeral-symbol">0</span> and <span class="numeral-symbol">1</span>.</p>
         <p>In the binary numeral system digits are commonly called bits (short for binary digits). The value
           contribution of each digit in a number can be expressed as:</p>
-        <p>_(d<sub>N</sub> * 2<sup>N</sup>) + ... + (d<sub>2</sub> * 2<sup>2</sup>) + (d<sub>1</sub> * 2<sup>1</sup>) +
-          (d<sub>0</sub> * 2<sup>0</sup>)_</p>
+        <pre
+          class="math"><var>d<sub>N</sub></var>(2<sup>N</sup>) + ... + <var>d<sub>2</sub></var>(2<sup>2</sup>) + <var>d<sub>1</sub></var>(2<sup>1</sup>) + <var>d<sub>0</sub></var>(2<sup>0</sup>)</pre>
         <p>To avoid confusing binary numbers with decimal numbers, a binary number is typically read digit-by-digit; so
-          while the decimal number 110 is pronounced one-hundred and ten, the binary number 110 would be read as one one
-          zero. There are various notations for indicating that a number is a binary number, here are some of the
-          notable ones:</p>
+          while the decimal number <span class="number">110</span> is pronounced one-hundred and ten, the binary number
+          <span class="number">110</span> would be read as one, one, zero. There are various notations for indicating
+          that a number is a binary number, here are some of the notable ones:</p>
         <ul>
-          <li>Explicitly stating &#39;binary&#39; after the number: 110 binary</li>
-          <li>Using a (lowercase or uppercase) b after the number: 110b or 110B</li>
-          <li>Using &#39;bin&#39; before the number: bin 110</li>
-          <li>Prepend the literal &#39;0b&#39; to the number: 0b110</li>
-          <li>Using a subscript to indicate the base: 110<sub>2</sub></li>
+          <li>Explicitly stating &#39;<code>binary</code>&#39; after the number: <code>110 binary</code></li>
+          <li>Using a (lowercase or uppercase) <code>b</code> after the number: <code>110b</code> or <code>110B</code>
+          </li>
+          <li>Using &#39;<code>bin</code>&#39; before the number: <code>bin 110</code></li>
+          <li>Prepend the literal &#39;<code>0b</code>&#39; to the number: <code>0b110</code></li>
+          <li>Using a subscript to indicate the base: <code>110<sub>2</sub></code></li>
         </ul>
-        <p>The value of binary 110 is decimal 6:</p>
+        <p>The value of binary number <span class="number">110</span> is decimal <span class="number">6</span> because
+          that is the total sum of each contributing digit&#39;s value:</p>
         <ul>
-          <li>1 * 4 or 1 * 2<sup>2</sup> or 1 fours</li>
-          <li>1 * 2 or 1 * 2<sup>1</sup> or 1 twos</li>
-          <li>0 * 1 or 0 * 2<sup>0</sup> or 0 ones</li>
+          <li><span class="math">1(4)</span> or <span class="math">1(2<sup>2</sup>)</span> or <span class="math">1
+              fours</span></li>
+          <li><span class="math">1(2)</span> or <span class="math">1(2<sup>1</sup>)</span> or <span class="math">1
+              twos</span></li>
+          <li><span class="math">0(1)</span> or <span class="math">0(2<sup>0</sup>)</span> or <span class="math">0
+              ones</span></li>
         </ul>
+
         <h3 id="counting-in-binary">Counting in Binary</h3>
-        <p>When counting up from zero in binary, when you get to 1 in any position of a number—there is no numeral
-          symbol representing a value higher than 1—so you must change the 1 to a 0 in that position and carry a one
+        <p>When counting up from zero in binary, when you get to <span class="number">1</span> in any position of a
+          number—there is no numeral symbol representing a value higher than <span class="number">1</span>—so you must
+          change the <span class="number">1</span> to a <span class="number">0</span> in that position and carry a one
           over to the next position to the left, repeating the carrying process as necessary.</p>
         <ul>
-          <li>0 + 1 = 1</li>
-          <li>1 + 1 = 10</li>
-          <li>11 + 1 = 100</li>
-          <li>111 + 1 = 1000</li>
+          <li><span class="math">0 + 1 = 1</span></li>
+          <li><span class="math">1 + 1 = 10</span></li>
+          <li><span class="math">11 + 1 = 100</span></li>
+          <li><span class="math">111 + 1 = 1000</span></li>
         </ul>
-        <h3 id="concepts-in-practice">Concepts in Practice</h3>
-        <pre><code class="lang-js"><span class="hljs-keyword">function</span> binaryCountUpTo(n) {
+        <h3 id="concepts-in-practice-counting-up-in-binary">Concepts in Practice: Counting Up in Binary</h3>
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">binaryCountUpTo</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-comment">// Return undefined for bad inputs</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Number</span>.isInteger(n) || n &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+  }
+
+  <span class="hljs-comment">// Process from 0 to n</span>
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt;= n; i++) {
     <span class="hljs-keyword">let</span> binVal = [];
-    <span class="hljs-keyword">let</span> temp = i;
+    <span class="hljs-keyword">let</span> curVal = i;
 
+    <span class="hljs-comment">// convert the current value to binary</span>
     <span class="hljs-keyword">do</span> {
-      binVal.push(temp % <span class="hljs-number">2</span>);
-      temp = Math.floor(temp / <span class="hljs-number">2</span>);
-    } <span class="hljs-keyword">while</span> (temp &gt;= <span class="hljs-number">1</span>);
+      binVal.push(curVal % <span class="hljs-number">2</span>);
+      curVal = <span class="hljs-built_in">Math</span>.floor(curVal / <span class="hljs-number">2</span>);
+    } <span class="hljs-keyword">while</span> (curVal &gt;= <span class="hljs-number">1</span>);
 
-    console.<span class="hljs-built_in">log</span>(`${binVal.reverse().<span class="hljs-built_in">join</span>(<span class="hljs-string">""</span>)} binary <span class="hljs-keyword">is</span> ${i} decimal`);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${binVal.reverse().join(<span class="hljs-string">""</span>)}</span> binary is <span class="hljs-subst">${i}</span> decimal`</span>);
   }
 }
 
 binaryCountUpTo(<span class="hljs-number">16</span>);
-
-/*
-Output:
-
-<span class="hljs-number">0</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> decimal
-<span class="hljs-number">1</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">1</span> decimal
-<span class="hljs-number">10</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">2</span> decimal
-<span class="hljs-number">11</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">3</span> decimal
-<span class="hljs-number">100</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">4</span> decimal
-<span class="hljs-number">101</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">5</span> decimal
-<span class="hljs-number">110</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">6</span> decimal
-<span class="hljs-number">111</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">7</span> decimal
-<span class="hljs-number">1000</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">8</span> decimal
-<span class="hljs-number">1001</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">9</span> decimal
-<span class="hljs-number">1010</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">10</span> decimal
-<span class="hljs-number">1011</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">11</span> decimal
-<span class="hljs-number">1100</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">12</span> decimal
-<span class="hljs-number">1101</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">13</span> decimal
-<span class="hljs-number">1110</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">14</span> decimal
-<span class="hljs-number">1111</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">15</span> decimal
-<span class="hljs-number">10000</span> binary <span class="hljs-keyword">is</span> <span class="hljs-number">16</span> decimal
-*/
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">//  0 binary is 0 decimal</span>
+<span class="hljs-comment">//  1 binary is 1 decimal</span>
+<span class="hljs-comment">//  10 binary is 2 decimal</span>
+<span class="hljs-comment">//  11 binary is 3 decimal</span>
+<span class="hljs-comment">//  100 binary is 4 decimal</span>
+<span class="hljs-comment">//  101 binary is 5 decimal</span>
+<span class="hljs-comment">//  110 binary is 6 decimal</span>
+<span class="hljs-comment">//  111 binary is 7 decimal</span>
+<span class="hljs-comment">//  1000 binary is 8 decimal</span>
+<span class="hljs-comment">//  1001 binary is 9 decimal</span>
+<span class="hljs-comment">//  1010 binary is 10 decimal</span>
+<span class="hljs-comment">//  1011 binary is 11 decimal</span>
+<span class="hljs-comment">//  1100 binary is 12 decimal</span>
+<span class="hljs-comment">//  1101 binary is 13 decimal</span>
+<span class="hljs-comment">//  1110 binary is 14 decimal</span>
+<span class="hljs-comment">//  1111 binary is 15 decimal</span>
+<span class="hljs-comment">//  10000 binary is 16 decimal</span>
 </code></pre>
       </section>
       <section id="Octal_Numeral_System" class="main-section">
