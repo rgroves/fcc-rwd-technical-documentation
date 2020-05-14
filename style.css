@@ -78,6 +78,7 @@ nav {
 @media screen and (min-width: 868px) {
   #page-container {
     grid-template-areas: "nav main";
+    grid-template-columns: 1fr 3fr;
     grid-gap: 30px;
   }
 
@@ -194,8 +195,7 @@ input[type="checkbox"]:checked ~ .navMenuToggleIcon > .hamburger-bottom {
   transform: rotate(-135deg);
   transition: all 0.25s;
 }
-
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 868px) {
   .navMenuToggleIcon {
     display: none;
   }
