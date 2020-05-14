@@ -274,15 +274,15 @@ return total;
           function—using JavaScript—that will take a whole number (from <span class="number">0</span> to <span
             class="number">999,999,999,999</span>) and break it down by the individual contributing value of each digit.
         </p>
-        <pre><code class="lang-js"><span class="hljs-keyword">function</span> <span class="hljs-title">decimalBreakdown</span>(n) {
-  // <span class="hljs-keyword">Return</span> <span class="hljs-type">undefined</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> a positive whole number less
-  // than <span class="hljs-number">1</span> trillion
-  <span class="hljs-keyword">if</span> (!Number.isInteger(n) || n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999_999_999_999</span>) {
-    <span class="hljs-keyword">return</span> undefined;
+        <pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decimalBreakdown</span>(<span class="hljs-params">n</span>) </span>{
+  <span class="hljs-comment">// Return undefined if not a positive whole number less</span>
+  <span class="hljs-comment">// than 1 trillion</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Number</span>.isInteger(n) || n &lt; <span class="hljs-number">0</span> || n &gt; <span class="hljs-number">999</span>_999_999_999) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
   }
 
-  // <span class="hljs-keyword">Array</span> <span class="hljs-keyword">with</span> descriptions <span class="hljs-keyword">of</span> number place names
-  const placeNames = [
+  <span class="hljs-comment">// Array with descriptions of number place names</span>
+  <span class="hljs-keyword">const</span> placeNames = [
     <span class="hljs-string">"ones"</span>,
     <span class="hljs-string">"tens"</span>,
     <span class="hljs-string">"hundreds"</span>,
@@ -297,51 +297,48 @@ return total;
     <span class="hljs-string">"hundred-billions"</span>,
   ];
 
-  // Convert number to <span class="hljs-keyword">array</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">digits</span> reversed
-  let valueStr = n.toString().split(<span class="hljs-string">""</span>).<span class="hljs-keyword">reverse</span>();
+  <span class="hljs-comment">// Convert number to array with digits reversed</span>
+  <span class="hljs-keyword">let</span> valueStr = n.toString().split(<span class="hljs-string">""</span>).reverse();
 
-  // <span class="hljs-keyword">Array</span> to hold the breakdown <span class="hljs-keyword">of</span> each digit
-  let breakdown = [];
+  <span class="hljs-comment">// Array to hold the breakdown of each digit</span>
+  <span class="hljs-keyword">let</span> breakdown = [];
 
-  valueStr.forEach((element, i) =&gt; {
-    let digitByValue = `${element}(<span class="hljs-number">10</span>^${i})`;
-    let digitByPlace = `${element} ${placeNames[i]}`;
-    breakdown.push(`${digitByValue}) <span class="hljs-keyword">or</span> ${digitByPlace}`);
+  valueStr.forEach(<span class="hljs-function">(<span class="hljs-params">element, i</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> digitByValue = <span class="hljs-string">`<span class="hljs-subst">${element}</span>(10^<span class="hljs-subst">${i}</span>)`</span>;
+    <span class="hljs-keyword">let</span> digitByPlace = <span class="hljs-string">`<span class="hljs-subst">${element}</span> <span class="hljs-subst">${placeNames[i]}</span>`</span>;
+    breakdown.push(<span class="hljs-string">`<span class="hljs-subst">${digitByValue}</span>) or <span class="hljs-subst">${digitByPlace}</span>`</span>);
   });
 
-  // <span class="hljs-keyword">return</span> the breakdown <span class="hljs-keyword">of</span> the number as a multi-line
-  // string.
-  console.log(breakdown.<span class="hljs-keyword">reverse</span>().join(<span class="hljs-string">" +\n"</span>));
+  <span class="hljs-comment">// return the breakdown of the number as a multi-line</span>
+  <span class="hljs-comment">// string.</span>
+  <span class="hljs-built_in">console</span>.log(breakdown.reverse().join(<span class="hljs-string">" +\n"</span>));
 }
 
 decimalBreakdown(<span class="hljs-number">312</span>);
-/* Output:
-  <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
-  <span class="hljs-number">1</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">1</span> tens +
-  <span class="hljs-number">2</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">2</span> ones
-*/
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">//  3(10^2) or 3 hundreds +</span>
+<span class="hljs-comment">//  1(10^1) or 1 tens +</span>
+<span class="hljs-comment">//  2(10^0) or 2 ones</span>
 
-decimalBreakdown(<span class="hljs-number">8_675_309</span>);
-/* Output:
-   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">6</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> millions +
-   <span class="hljs-number">6</span>(<span class="hljs-number">10</span>^<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">6</span> hundred-thousands +
-   <span class="hljs-number">7</span>(<span class="hljs-number">10</span>^<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">7</span> ten-thousands +
-   <span class="hljs-number">5</span>(<span class="hljs-number">10</span>^<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> thousands +
-   <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
-   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> tens +
-   <span class="hljs-number">9</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">9</span> ones
-*/
+decimalBreakdown(<span class="hljs-number">8</span>_675_309);
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">//  8(10^6) or 8 millions +</span>
+<span class="hljs-comment">//  6(10^5) or 6 hundred-thousands +</span>
+<span class="hljs-comment">//  7(10^4) or 7 ten-thousands +</span>
+<span class="hljs-comment">//  5(10^3) or 5 thousands +</span>
+<span class="hljs-comment">//  3(10^2) or 3 hundreds +</span>
+<span class="hljs-comment">//  0(10^1) or 0 tens +</span>
+<span class="hljs-comment">//  9(10^0) or 9 ones</span>
 
-decimalBreakdown(<span class="hljs-number">5_882_300</span>);
-/* Output:
-   <span class="hljs-number">5</span>(<span class="hljs-number">10</span>^<span class="hljs-number">6</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> millions +
-   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">5</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> hundred-thousands +
-   <span class="hljs-number">8</span>(<span class="hljs-number">10</span>^<span class="hljs-number">4</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">8</span> ten-thousands +
-   <span class="hljs-number">2</span>(<span class="hljs-number">10</span>^<span class="hljs-number">3</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">2</span> thousands +
-   <span class="hljs-number">3</span>(<span class="hljs-number">10</span>^<span class="hljs-number">2</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> hundreds +
-   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">1</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> tens +
-   <span class="hljs-number">0</span>(<span class="hljs-number">10</span>^<span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> ones
-*/
+decimalBreakdown(<span class="hljs-number">5</span>_882_300);
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">//  5(10^6) or 5 millions +</span>
+<span class="hljs-comment">//  8(10^5) or 8 hundred-thousands +</span>
+<span class="hljs-comment">//  8(10^4) or 8 ten-thousands +</span>
+<span class="hljs-comment">//  2(10^3) or 2 thousands +</span>
+<span class="hljs-comment">//  3(10^2) or 3 hundreds +</span>
+<span class="hljs-comment">//  0(10^1) or 0 tens +</span>
+<span class="hljs-comment">//  0(10^0) or 0 ones</span>
 </code></pre>
       </section>
       <section id="Binary_Numeral_System" class="main-section">
